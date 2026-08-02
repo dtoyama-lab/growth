@@ -1,4 +1,10 @@
-export type Product = 'Préstamos' | 'Inversiones' | 'Cambio Seguro'
+export type Product =
+  | 'Préstamos Empresarios'
+  | 'Préstamos Inversionistas'
+  | 'Factoring Proveedores'
+  | 'Factoring Inversionistas'
+  | 'Gestora de Fondos'
+  | 'Cambio Seguro'
 
 export type FormData = {
   producto: string
@@ -31,8 +37,11 @@ export const initialFormData: FormData = {
 }
 
 export const productoOptions: string[] = [
-  'Préstamos',
-  'Inversiones',
+  'Préstamos Empresarios',
+  'Préstamos Inversionistas',
+  'Factoring Proveedores',
+  'Factoring Inversionistas',
+  'Gestora de Fondos',
   'Cambio Seguro',
 ]
 
@@ -96,12 +105,27 @@ export type InfluencerTier = {
 
 // Placeholder suggestions filtered by product (no real integration yet).
 export const influencerSuggestions: Record<string, InfluencerTier[]> = {
-  Préstamos: [
+  'Préstamos Empresarios': [
     { tier: 'Nano', niche: 'Emprendimiento y pymes', reach: '3K – 10K', fee: 'S/ ___' },
-    { tier: 'Micro', niche: 'Finanzas personales', reach: '25K – 80K', fee: 'S/ ___' },
+    { tier: 'Micro', niche: 'Finanzas para negocios', reach: '25K – 80K', fee: 'S/ ___' },
     { tier: 'Macro', niche: 'Negocios y economía', reach: '200K – 500K', fee: 'S/ ___' },
   ],
-  Inversiones: [
+  'Préstamos Inversionistas': [
+    { tier: 'Nano', niche: 'Ahorro e inversión inicial', reach: '3K – 10K', fee: 'S/ ___' },
+    { tier: 'Micro', niche: 'Finanzas personales', reach: '25K – 80K', fee: 'S/ ___' },
+    { tier: 'Macro', niche: 'Educación financiera', reach: '200K – 500K', fee: 'S/ ___' },
+  ],
+  'Factoring Proveedores': [
+    { tier: 'Nano', niche: 'Emprendimiento y pymes', reach: '3K – 10K', fee: 'S/ ___' },
+    { tier: 'Micro', niche: 'Finanzas para negocios', reach: '25K – 80K', fee: 'S/ ___' },
+    { tier: 'Macro', niche: 'Negocios y economía', reach: '200K – 500K', fee: 'S/ ___' },
+  ],
+  'Factoring Inversionistas': [
+    { tier: 'Nano', niche: 'Ahorro e inversión inicial', reach: '3K – 10K', fee: 'S/ ___' },
+    { tier: 'Micro', niche: 'Inversión y patrimonio', reach: '25K – 80K', fee: 'S/ ___' },
+    { tier: 'Macro', niche: 'Educación financiera', reach: '200K – 500K', fee: 'S/ ___' },
+  ],
+  'Gestora de Fondos': [
     { tier: 'Nano', niche: 'Ahorro e inversión inicial', reach: '3K – 10K', fee: 'S/ ___' },
     { tier: 'Micro', niche: 'Inversión y patrimonio', reach: '25K – 80K', fee: 'S/ ___' },
     { tier: 'Macro', niche: 'Educación financiera', reach: '200K – 500K', fee: 'S/ ___' },
