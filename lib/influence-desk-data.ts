@@ -15,6 +15,9 @@ export type FormData = {
   resultadoOtro: string
   colaboracion: string[]
   colaboracionOtro: string
+  plataformas: string[]
+  plataformaOtro: string
+  tiers: string[]
   presupuesto: string
   fechaLimite: string
   mensajeClave: string
@@ -30,6 +33,9 @@ export const initialFormData: FormData = {
   resultadoOtro: '',
   colaboracion: [],
   colaboracionOtro: '',
+  plataformas: [],
+  plataformaOtro: '',
+  tiers: [],
   presupuesto: '',
   fechaLimite: '',
   mensajeClave: '',
@@ -82,7 +88,13 @@ export const colaboracionOptions: string[] = [
   'Serie de contenido',
   'Embajador de marca',
   'UGC only',
+  'Story',
+  'Reel',
 ]
+
+export const plataformaOptions: string[] = ['Instagram', 'YouTube', 'TikTok', 'Facebook']
+
+export const tierOptions: string[] = ['Nano', 'Micro', 'Macro']
 
 export const questionLabels: string[] = [
   'Producto de la campaña',
@@ -90,6 +102,8 @@ export const questionLabels: string[] = [
   'Objetivo de la campaña',
   'Resultado esperado',
   'Tipo de colaboración',
+  'Plataforma de la campaña',
+  'Nivel de influencer preferido',
   'Presupuesto disponible',
   'Fecha límite de publicación',
   'Mensaje clave o restricciones legales',

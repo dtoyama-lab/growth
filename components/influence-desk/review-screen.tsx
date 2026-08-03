@@ -22,6 +22,8 @@ export function ReviewScreen({
     joinMulti(data.objetivos, data.objetivoOtro),
     joinMulti(data.resultados, data.resultadoOtro),
     joinMulti(data.colaboracion, data.colaboracionOtro),
+    joinMulti(data.plataformas, data.plataformaOtro),
+    data.tiers.join(', '),
     data.presupuesto,
     data.fechaLimite
       ? new Date(data.fechaLimite + 'T00:00:00').toLocaleDateString('es-PE', {

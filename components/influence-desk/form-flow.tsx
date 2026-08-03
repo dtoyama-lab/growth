@@ -10,6 +10,8 @@ import {
   objetivoOptions,
   resultadoOptions,
   colaboracionOptions,
+  plataformaOptions,
+  tierOptions,
   questionLabels,
   buildFolio,
 } from '@/lib/influence-desk-data'
@@ -21,7 +23,7 @@ import { ReviewScreen } from './review-screen'
 import { ConfirmationScreen } from './confirmation-screen'
 
 type Step = 'login' | number | 'review' | 'confirm'
-const TOTAL = 9
+const TOTAL = 11
 const OTRO = 'Otro'
 
 export function FormFlow() {
@@ -37,7 +39,7 @@ export function FormFlow() {
   }
 
   function toggle(
-    key: 'objetivos' | 'resultados' | 'colaboracion',
+    key: 'objetivos' | 'resultados' | 'colaboracion' | 'plataformas' | 'tiers',
     value: string,
   ) {
     setData((d) => {
@@ -67,8 +69,13 @@ export function FormFlow() {
           return 'Describe la colaboración en el campo "Otro".'
         return ''
       case 5:
+        if (data.plataformas.length === 0) return 'Selecciona al menos una plataforma.'
+        if (data.plataformas.includes(OTRO) && !data.plataformaOtro.trim())
+          return 'Describe la plataforma en el campo "Otro".'
+        return ''
+      case 7:
         return data.presupuesto.trim() ? '' : 'Ingresa un presupuesto disponible.'
-      case 6:
+      case 8:
         return data.fechaLimite ? '' : 'Selecciona una fecha límite.'
       case 3:
         if (data.resultados.includes(OTRO) && !data.resultadoOtro.trim())
@@ -212,6 +219,28 @@ export function FormFlow() {
           )}
 
           {step === 5 && (
+            <ChipGroup
+              options={[...plataformaOptions, OTRO]}
+              selected={data.plataformas}
+              onToggle={(v) => toggle('plataformas', v)}
+              showOtro={data.plataformas.includes(OTRO)}
+              otroValue={data.plataformaOtro}
+              onOtroChange={(v) => update('plataformaOtro', v)}
+            />
+          )}
+
+          {step === 6 && (
+            <ChipGroup
+              options={tierOptions}
+              selected={data.tiers}
+              onToggle={(v) => toggle('tiers', v)}
+              showOtro={false}
+              otroValue=""
+              onOtroChange={() => {}}
+            />
+          )}
+
+          {step === 7 && (
             <TextField
               value={data.presupuesto}
               onChange={(v) => update('presupuesto', v)}
@@ -220,7 +249,7 @@ export function FormFlow() {
             />
           )}
 
-          {step === 6 && (
+          {step === 8 && (
             <input
               type="date"
               value={data.fechaLimite}
@@ -230,7 +259,7 @@ export function FormFlow() {
             />
           )}
 
-          {step === 7 && (
+          {step === 9 && (
             <TextArea
               value={data.mensajeClave}
               onChange={(v) => update('mensajeClave', v)}
@@ -238,7 +267,7 @@ export function FormFlow() {
             />
           )}
 
-          {step === 8 && (
+          {step === 10 && (
             <TextArea
               value={data.influencers}
               onChange={(v) => update('influencers', v)}
@@ -258,6 +287,8 @@ function questionTitle(index: number): string {
     '¿Cuál es el objetivo de la campaña?',
     '¿Qué resultado esperas?',
     '¿Qué tipo de colaboración necesitas?',
+    '¿En qué plataforma se publicará?',
+    '¿Qué nivel de influencer prefieres?',
     '¿Cuál es tu presupuesto disponible?',
     '¿Cuál es tu fecha límite de publicación?',
     '¿Hay mensaje clave o restricciones legales?',
@@ -272,6 +303,8 @@ function questionHelp(index: number): string | undefined {
     'Puedes elegir más de una opción.',
     'Opcional. Puedes elegir más de una opción.',
     'Puedes elegir más de una opción.',
+    'Puedes elegir más de una opción.',
+    'Opcional. Puedes elegir más de una opción.',
     undefined,
     undefined,
     'Opcional.',
